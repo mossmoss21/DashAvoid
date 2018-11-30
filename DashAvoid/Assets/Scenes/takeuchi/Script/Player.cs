@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    private int isBossFlg;
+    private int isBossFlg;  // 0:通常時 1:ボス時
+    private int speed;      // プレイヤーの速度
 
     // Use this for initialization
     void Start () {
-        int isBossFlg = 0;
+        isBossFlg = 0;
+        speed = 0;
+
 	}
 	
 	// Update is called once per frame
@@ -22,12 +25,17 @@ public class Player : MonoBehaviour {
         // 通常時の動き
         if(isBossFlg == 0)
         {
-            //→
+            //常に移動
+            //transform.position += new Vector3(0.3f, 0, 0);
+            transform.position += new Vector3(0.01f, 0, 0);  //debug
+
+            //→ 加速
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 transform.position += new Vector3(0.3f, 0, 0);
             }
-            //←(移動速度減少予定)
+
+            //← 減速
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 transform.position -= new Vector3(0.3f, 0, 0);
