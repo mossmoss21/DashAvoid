@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
 
     private float jumpPower;      //ジャンプ力
     private bool isGrounded;      //地面に接しているか
+    private int jmpCnt;           //ジャンプの押している長さのカウント
 
     private float attackCount;    //アタックカウント
     private bool possibleAttack;  //アタック可能フラグ
@@ -30,18 +31,19 @@ public class Player : MonoBehaviour {
         isGrounded = false;
         possibleFlash = false;
 
+        jumpPower = 450.0f;
         attackCount = 0.0f;
         possibleAttack = true;
         isDead = false;
-        runSpeed = 0.01f;
+        runSpeed = 0.03f;
         defaultRunSpeed = runSpeed;
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log("スピード" + runSpeed);
-        Debug.Log("フラッシュ可能" + possibleFlash);
+        //Debug.Log("スピード" + runSpeed);
+        //Debug.Log("フラッシュ可能" + possibleFlash);
         Debug.Log("地面接しているか" + isGrounded);
 
         //移動
@@ -71,13 +73,15 @@ public class Player : MonoBehaviour {
              1f, 1 << LayerMask.NameToLayer("flash"));
 
         //ジャンプ
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isGrounded)
-            {
-                jump();
-            }
+            jump();
+            //if (isGrounded)
+            //{
+            //    jump();
+            //}
         }
+
 
         //攻撃
         if (Input.GetKey(KeyCode.X))
@@ -110,7 +114,7 @@ public class Player : MonoBehaviour {
             //→ 加速
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                runSpeed = 0.05f;
+                runSpeed = 0.06f;
             }
 
             //← 減速
@@ -148,10 +152,17 @@ public class Player : MonoBehaviour {
 
     // ジャンプ
     void jump(){
+
         //押してる長さでジャンプ力変化
         //三段階か四段階でポイントがあって
         //そこの時点でSpaceキーが押されているか判断
         //離されていたら落下(RigidBody)
+
+        //ジャンプ
+        GetComponent<Rigidbody2D>().AddForce(new Vector3(0, jumpPower, 0));
+
+        //浮いてるブロックとの当たり判定
+        //「Edit」->「Project Settings」->「Physics」を選択するとInspectorに「PhysicsManager」
 
     }
 
