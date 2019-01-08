@@ -62,9 +62,10 @@ public class Player : MonoBehaviour {
 
         //地面当たり判定
         //プレイヤーの下が layer="Block"
+        
         isGrounded = Physics2D.Raycast(
              transform.position, Vector2.down,
-             1f, 1 << LayerMask.NameToLayer("Block"));
+             1.3f, 1 << LayerMask.NameToLayer("Block"));
 
         //フラッシュオブジェクト当たり判定
         //プレイヤーの右端が layer="flash"のオブジェクトと接触しているならTrue
@@ -75,11 +76,10 @@ public class Player : MonoBehaviour {
         //ジャンプ
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            jump();
-            //if (isGrounded)
-            //{
-            //    jump();
-            //}
+            if (isGrounded)
+            {
+                jump();
+            }
         }
 
 
