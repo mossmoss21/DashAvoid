@@ -11,7 +11,7 @@ public class scroll : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = new Vector3( camera.transform.position.x,0,0);
+        transform.position = new Vector3( camera.transform.position.x, camera.transform.position.y, 0);
   
         Debug.Log(camera.transform.position.x);
 	}
