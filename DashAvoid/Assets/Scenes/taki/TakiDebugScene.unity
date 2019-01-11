@@ -4152,12 +4152,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 129935604}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -38.38, y: -15.51, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -83.01064, y: -9.657606, z: 5.9150133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1982449330}
+  m_RootOrder: 744
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &129935607
 BoxCollider2D:
@@ -38815,7 +38815,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4533942608130154, guid: 376bf24ef153be4459e2d5d8d53e6b1b, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1556124227818250, guid: 376bf24ef153be4459e2d5d8d53e6b1b, type: 2}
       propertyPath: m_Name
@@ -60342,7 +60342,6 @@ GameObject:
   - component: {fileID: 1682473595}
   - component: {fileID: 1682473594}
   - component: {fileID: 1682473598}
-  - component: {fileID: 1682473599}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -60423,26 +60422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b82de6d41161f74d9dee4d825b48e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &1682473599
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1682473593}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1689927360
 GameObject:
   m_ObjectHideFlags: 0
@@ -70013,8 +69992,9 @@ Transform:
   - {fileID: 2145808438}
   - {fileID: 641845161}
   - {fileID: 1986459953}
+  - {fileID: 129935606}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1983532722
 GameObject:
