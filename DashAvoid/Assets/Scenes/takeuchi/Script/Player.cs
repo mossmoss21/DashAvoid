@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
 
     private float jumpPower;      //ジャンプ力
     private bool isGrounded;      //地面に接しているか
-    private int jmpCnt;           //ジャンプの押している長さのカウント
+    private float jumpCnt;           //ジャンプの押している長さのカウント
 
     private float attackCount;    //アタックカウント
     private bool possibleAttack;  //アタック可能フラグ
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
         isGrounded = false;
         possibleFlash = false;
 
-        jumpPower = 450.0f;
+        jumpPower = 150.0f;
         attackCount = 0.0f;
         possibleAttack = true;
         isDead = false;
@@ -42,9 +42,8 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log("スピード" + runSpeed);
-        //Debug.Log("フラッシュ可能" + possibleFlash);
         Debug.Log("地面接しているか" + isGrounded);
+        Debug.Log("ジャンプカウント" + jumpCnt);
 
         //移動
         move();
@@ -74,12 +73,23 @@ public class Player : MonoBehaviour {
              1f, 1 << LayerMask.NameToLayer("flash"));
 
         //ジャンプ
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
+            Debug.Log("スペースキーDOWN");
+            //時間をカウント
+            jumpCnt += (1 * Time.deltaTime);
+            Debug.Log("ジャンプカウント" + jumpCnt);
+
             if (isGrounded)
             {
                 jump();
             }
+
+        }
+        if (Input.GetKeyUp(KeyCode.Space) || isGrounded)
+        {
+            jumpCnt = 0;
+            Debug.Log("スペースキーUP");
         }
 
 
@@ -115,12 +125,14 @@ public class Player : MonoBehaviour {
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 runSpeed = 0.06f;
+                Debug.Log("加速");
             }
 
             //← 減速
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 runSpeed = 0.0f;
+                Debug.Log("減速");
             }
 
         }
@@ -153,13 +165,12 @@ public class Player : MonoBehaviour {
     // ジャンプ
     void jump(){
 
-        //押してる長さでジャンプ力変化
-        //三段階か四段階でポイントがあって
-        //そこの時点でSpaceキーが押されているか判断
-        //離されていたら落下(RigidBody)
-
         //ジャンプ
-        GetComponent<Rigidbody2D>().AddForce(new Vector3(0, jumpPower, 0));
+        if (jumpCnt <= 1.0f)
+        { 
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpPower));
+            Debug.Log("ジャンプ");
+        }
 
         //浮いてるブロックとの当たり判定
         //「Edit」->「Project Settings」->「Physics」を選択するとInspectorに「PhysicsManager」
