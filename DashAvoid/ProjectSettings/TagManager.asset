@@ -13,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - flash
-  - Block
-  - None
-  - 
+  - BottomFloor
+  - NotBottomFloor
+  - ActionPlayer
+  - Player
   - 
   - 
   - 
