@@ -2,153 +2,106 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
-
+public class Player : MonoBehaviour
+{
     public static Player instance;
 
-    public bool isBossFlg;        // 0:通常時 1:ボス時
-    public bool isGameOver;       //ゲームオーバー判定フラグ
-    public bool isDead;           //死亡判定フラグ
+    private bool isGround;       // 地面に接しているか
+    public bool isDead;            //死亡判定フラグ
 
     private float runSpeed;        // プレイヤーの速度
     private float defaultRunSpeed; // プレイヤーのデフォルトのスピード
 
-    private float jumpPower;      //ジャンプ力
-    private bool isGrounded;      //地面に接しているか
-    private float jumpCnt;           //ジャンプの押している長さのカウント
+    private float jumpPower;       // ジャンプ力
+    private float jumpCnt;         // ジャンプの押している長さのカウント
 
-    private float attackCount;    //アタックカウント
-    private bool possibleAttack;  //アタック可能フラグ
-    private const float ATTACK_INTERVAL = 0.5f; //アタックのインターバル定数
-
-    private bool possibleFlash;   //フラッシュ出来るかのフラグ
-
-    // Use this for initialization
-    void Start () {
+    /**********************************
+    * 
+    * 初期化
+    * 
+    **********************************/
+    void Start()
+    {
         instance = this;
-        isBossFlg = false;
-        isGameOver = false;
-        isGrounded = false;
-        possibleFlash = false;
-
-        jumpPower = 150.0f;
-        attackCount = 0.0f;
-        possibleAttack = true;
+        isGround = false;
         isDead = false;
+
+        jumpPower = 200.0f;
         runSpeed = 0.03f;
         defaultRunSpeed = runSpeed;
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-        Debug.Log("地面接しているか" + isGrounded);
-        Debug.Log("ジャンプカウント" + jumpCnt);
+
+    /**********************************
+    * 
+    * 更新
+    * 
+    **********************************/
+    void Update()
+    {
+        //debug
+        //Debug.Log("地面接しているか" + isGround);
+        //Debug.Log("ジャンプカウント" + jumpCnt);
+
+
+        //状態管理
+        StateManagement();
+
 
         //移動
-        move();
-
-        if (attackCount >= ATTACK_INTERVAL)
-        {
-            //攻撃可能状態へ
-            possibleAttack = true;
-        }
-        else
-        {
-            //秒数加算
-            attackCount += Time.deltaTime;
-        }
-
-        //地面当たり判定
-        //プレイヤーの下が layer="Block"
-        
-        isGrounded = Physics2D.Raycast(
-             transform.position, Vector2.down,
-             1.3f, 1 << LayerMask.NameToLayer("Block"));
-
-        //フラッシュオブジェクト当たり判定
-        //プレイヤーの右端が layer="flash"のオブジェクトと接触しているならTrue
-        possibleFlash = Physics2D.Raycast(
-             transform.position, Vector2.right,
-             1f, 1 << LayerMask.NameToLayer("flash"));
+        Move();
 
         //ジャンプ
         if (Input.GetKey(KeyCode.Space))
         {
             Debug.Log("スペースキーDOWN");
             //時間をカウント
-            jumpCnt += (1 * Time.deltaTime);
-            Debug.Log("ジャンプカウント" + jumpCnt);
+            jumpCnt += 5.0f;
 
-            if (isGrounded)
+            if (isGround || jumpCnt >= 200 && jumpCnt <= 300)
             {
-                jump();
+                Jump();
             }
 
         }
-        if (Input.GetKeyUp(KeyCode.Space) || isGrounded)
+        if (Input.GetKeyUp(KeyCode.Space) || isGround)
         {
             jumpCnt = 0;
-            Debug.Log("スペースキーUP");
-        }
-
-
-        //攻撃
-        if (Input.GetKey(KeyCode.X))
-        {
-            if (possibleAttack)
-            {
-                attack();
-            }
-        }
-
-        //フラッシュ
-        if (Input.GetKey(KeyCode.C))
-        {
-            if (possibleFlash)
-            {
-                flashAction();
-            }
+            Debug.Log("地面");
         }
 
     }
 
-    // 移動 
-    void move(){
+    /**********************************
+    * 
+    * プレイヤーの状態管理
+    * 
+    **********************************/
+    void StateManagement()
+    {
+        //地面当たり判定
+        //プレイヤーの下が layer="Block"
+        isGround = Physics2D.Raycast(
+             transform.position, Vector2.down,
+             1.3f, 1 << LayerMask.NameToLayer("Block"));
+    }
 
-        // 通常時の動き
-        if(isBossFlg == false){
+    /**********************************
+    * 
+    * 移動
+    * 
+    **********************************/
+    void Move()
+    {
+        runSpeed = defaultRunSpeed;
 
-            runSpeed = defaultRunSpeed;
-
-            //→ 加速
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                runSpeed = 0.06f;
-                Debug.Log("加速");
-            }
-
-            //← 減速
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                runSpeed = 0.0f;
-                Debug.Log("減速");
-            }
-
+        //→ 加速
+        if (Input.GetKey(KeyCode.RightArrow)){
+            runSpeed = 0.06f;
         }
-
-        // ボス時の動き
-        else{
-            //→ 右
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                transform.position += new Vector3(0.3f, 0, 0);
-            }
-            //← 左
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                transform.position -= new Vector3(0.3f, 0, 0);
-            }
+        //← 減速
+        if (Input.GetKey(KeyCode.LeftArrow)){
+            runSpeed = 0.0f;
         }
 
         //移動の計算
@@ -156,18 +109,17 @@ public class Player : MonoBehaviour {
 
     }
 
-    // 攻撃
-    void attack(){
-        //敵を攻撃
-        //弾を消せる
-    }
-
-    // ジャンプ
-    void jump(){
+    /**********************************
+    * 
+    * ジャンプ
+    * 
+    **********************************/
+    void Jump()
+    {
 
         //ジャンプ
-        if (jumpCnt <= 1.0f)
-        { 
+        if (jumpCnt <= 200.0f)
+        {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpPower));
             Debug.Log("ジャンプ");
         }
@@ -176,10 +128,4 @@ public class Player : MonoBehaviour {
         //「Edit」->「Project Settings」->「Physics」を選択するとInspectorに「PhysicsManager」
 
     }
-
-    // フラッシュ
-    void flashAction(){
-        //switchでオブジェクトによって動作を分ける
-    }
-
 }
