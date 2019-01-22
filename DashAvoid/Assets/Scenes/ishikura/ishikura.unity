@@ -195,11 +195,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 701135937}
+  - component: {fileID: 701135939}
   - component: {fileID: 701135936}
   - component: {fileID: 701135938}
-  - component: {fileID: 701135939}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,9 +270,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 701135935}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 619efa190c481a44eaaddef6778a0802, type: 3}
+  m_Script: {fileID: 11500000, guid: a5fe48a08e336cf478571ed215520ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBossFlg: 0
+  isGameOver: 0
+  isDead: 0
 --- !u!61 &701135939
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -307,6 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1413307006}
   - component: {fileID: 1413307005}
+  - component: {fileID: 1413307007}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -371,6 +375,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1413307007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413307004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1921e7c1576d7747ac8f999d329718f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  bullet: {fileID: 1514616861205838, guid: 5c1323a9118099f4c9d4b549cc9db9ae, type: 2}
 --- !u!1 &1454069019 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1514616861205838, guid: 5c1323a9118099f4c9d4b549cc9db9ae,
@@ -453,7 +470,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.624992
+  orthographic size: 6.8221965
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

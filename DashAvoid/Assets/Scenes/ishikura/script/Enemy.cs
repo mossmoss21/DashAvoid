@@ -11,8 +11,8 @@ public class Enemy : MonoBehaviour {
     public GameObject bullet;
 
     // Startメソッドをコルーチンとして呼び出す
-    IEnumerator Start()
-    {
+    IEnumerator Start(){
+
         while (true)
         {
             // 弾をエネミーと同じ位置 /角度で作成
@@ -24,6 +24,17 @@ public class Enemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-	}
+        /*
+            Vector2 Aim(GameObject Enemy, GameObject Player, float angleOffset)
+            {
+                Vector3 posDif = Player.transform.position - Enemy.transform.position;
+                float angle = Mathf.Atan2(posDif.y, posDif.x) * Mathf.Rad2Deg;
+                Vector3 euler = new Vector3(0, 0, angle + angleOffset);
+
+                Enemy.transform.rotation = Quaternion.Euler(euler);
+
+                return posDif.normalized;
+            }
+        */
+    }
 }
