@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
         }
         //← 減速
         if (Input.GetKey(KeyCode.LeftArrow)){
-            runSpeed = 0.0f;
+            runSpeed = -0.03f;
         }
 
         //移動の計算
