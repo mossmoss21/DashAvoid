@@ -15,6 +15,7 @@ public class item : MonoBehaviour {
 	}
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameObject.Find("ScoreText").SendMessage("ScoreSum");
         Destroy(this.gameObject);   //自分を消去する
     }
 }
