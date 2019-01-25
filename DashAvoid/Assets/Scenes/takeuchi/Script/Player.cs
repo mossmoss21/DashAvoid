@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
     private bool isGround;         // 地面に接しているか
     public bool isDead;            //死亡判定フラグ
+    private bool isceiling;        // 天井に接している
 
     private float runSpeed;        // プレイヤーの速度
     private float defaultRunSpeed; // プレイヤーのデフォルトのスピード
@@ -68,48 +69,7 @@ public class Player : MonoBehaviour
         Move();
 
         //ジャンプ
-        if (Input.GetKey(KeyCode.Space))
-        {
-            isJumpFlg = true;
-            jumpCnt += Time.deltaTime;
-            Vector3 pos = transform.position;
-
-            if(jumpCnt < 0.6f)
-            pos.y += 0.1f;// initVelocity * elapsedTime + gravity * Mathf.Pow(jumpCnt,2f)/ 2;
-
-            transform.position = pos;
-        }
-
-        if(isGround)
-        {
-            isJumpFlg = false;
-            jumpCnt = 0f;
-        }
-
-        /*
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Debug.Log("スペースキーDOWN");
-            //時間をカウント
-            jumpCnt += 1 * Time.deltaTime;// 1.0f;
-
-            if (isGround)
-            {
-                Jump();
-            }
-            else if ( (jumpCnt >= 0.3f && jumpCnt <= 0.5f) && twoJumpFlg == false )
-            {
-                TwoJump();
-            }
-
-        }
-        if (isGround)
-        {
-            jumpCnt = 0;
-            twoJumpFlg = false;
-            //Debug.Log("地面");
-        }
-        */
+        Jump();
 
     }
 
@@ -157,16 +117,27 @@ public class Player : MonoBehaviour
     **********************************/
     void Jump()
     {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpPower));
-            //Debug.Log("ジャンプ");
-        //浮いてるブロックとの当たり判定
-        //「Edit」->「Project Settings」->「Physics」を選択するとInspectorに「PhysicsManager」
+        if (Input.GetKey(KeyCode.Space))
+        {
+            isJumpFlg = true;
+            jumpCnt += Time.deltaTime;
+            Vector3 pos = transform.position;
+
+            if (jumpCnt < 0.6f)
+                pos.y += 0.1f;// initVelocity * elapsedTime + gravity * Mathf.Pow(jumpCnt,2f)/ 2;
+
+            transform.position = pos;
+        }
+
+        if (isGround)
+        {
+            isJumpFlg = false;
+            jumpCnt = 0f;
+        }
     }
 
-    void TwoJump()
-    {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpPower));
-            //Debug.Log("二段ジャンプ");
-            twoJumpFlg = true;
-    }
+    /*
+     *  ジャンプパワーから重力を引き続ける
+     */
+
 }
