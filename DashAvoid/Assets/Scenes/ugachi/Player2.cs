@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player2 : MonoBehaviour {
 
-    public static Player instance;
+    public static Player2 instance;
 
     public bool isGameOver;       //ゲームオーバー判定フラグ
     public bool isDead;
