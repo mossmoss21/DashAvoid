@@ -18,7 +18,7 @@ public class PlayerSub : MonoBehaviour {
     {
         if (other.gameObject.tag == "shougai")
         {
-            Player.instance.isDead = true;
+            //Player.instance.isDead = true;
         }
     }
 

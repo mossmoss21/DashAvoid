@@ -6,23 +6,19 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
 
+    //判定
     private bool isGround;         // 地面に接しているか
-    public bool isDead;            //死亡判定フラグ
-    private bool isceiling;        // 天井に接している
+    private bool isCeiling;        // 天井に接している
 
-    private float runSpeed;        // プレイヤーの速度
+    //移動
+    private float runSpeed;        // プレイヤーの速度(増減)
     private float defaultRunSpeed; // プレイヤーのデフォルトのスピード
 
-    [SerializeField]
+    //ジャンプ
+    private bool isJumpFlg;        // ジャンプしているか
+    private bool twoJumpFlg;       // 二段ジャンプしているか
     private float jumpPower;       // ジャンプ力
     private float jumpCnt;         // ジャンプの押している長さのカウント
-    private bool twoJumpFlg;       // 二段ジャンプしているか
-
-    //ジャンプコード
-    private bool isJumpFlg;        // ジャンプしているか
-    float gravity;
-    float initVelocity;
-    float elapsedTime;
 
     /**********************************
     * 
@@ -32,21 +28,21 @@ public class Player : MonoBehaviour
     void Start()
     {
         instance = this;
-        isGround = false;
-        isDead = false;
-        twoJumpFlg = false;
-        isJumpFlg = false;
 
-        jumpPower = 150.0f;
+        //判定
+        isGround = false;
+        isCeiling = false;
+
+        //移動
         //runSpeed = 0.02f;
         runSpeed = 0.00f;
         defaultRunSpeed = runSpeed;
 
-        //ジャンプコード
-        gravity = -9.8f;
-        initVelocity = 10f;
-        elapsedTime = 0f;
-
+        //ジャンプ
+        isJumpFlg = false;
+        twoJumpFlg = false;
+        jumpPower = 150.0f;
+        jumpCnt = 0.0f;
     }
 
     /**********************************
@@ -57,13 +53,13 @@ public class Player : MonoBehaviour
     void Update()
     {
         //debug
-        Debug.Log("地面接しているか" + isGround);
+        Debug.Log("地面と接しているか" + isGround);
+        Debug.Log("天井と接しているか" + isCeiling);
         //Debug.Log("ジャンプカウント" + jumpCnt);
 
 
-        //状態管理
+        //状態管理(判定)
         StateManagement();
-
 
         //移動
         Move();
@@ -85,6 +81,12 @@ public class Player : MonoBehaviour
         isGround = Physics2D.Raycast(
              transform.position, Vector2.down,
              0.55f, 1 << LayerMask.NameToLayer("Block"));
+
+        //天井との当たり判定
+        //プレイヤーの上が layer="Block"
+        isCeiling = Physics2D.Raycast(
+            transform.position, Vector2.up,
+            0.45f, 1 << LayerMask.NameToLayer("Block"));
     }
 
     /**********************************
@@ -123,7 +125,7 @@ public class Player : MonoBehaviour
             jumpCnt += Time.deltaTime;
             Vector3 pos = transform.position;
 
-            if (jumpCnt < 0.6f)
+            if (jumpCnt < 0.4f && !isCeiling)
                 pos.y += 0.1f;// initVelocity * elapsedTime + gravity * Mathf.Pow(jumpCnt,2f)/ 2;
 
             transform.position = pos;
