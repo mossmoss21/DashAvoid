@@ -14,7 +14,7 @@ public class MoveWall : MonoBehaviour {
 	void Update () {
 
         //移動
-        transform.position += new Vector3(0.005f, 0f, 0);
+        transform.position += new Vector3(0.01f, 0f, 0);
 
     }
 
