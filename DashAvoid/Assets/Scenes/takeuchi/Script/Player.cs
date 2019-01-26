@@ -13,12 +13,14 @@ public class Player : MonoBehaviour
     //移動
     private float runSpeed;        // プレイヤーの速度(増減)
     private float defaultRunSpeed; // プレイヤーのデフォルトのスピード
+    private float dash;            // 走る速度
+    private float slow;            // 減速時の速度
 
     //ジャンプ
     private bool isJumpFlg;        // ジャンプしているか
     private bool twoJumpFlg;       // 二段ジャンプしているか
-    private float jumpPower;       // ジャンプ力
     private float jumpCnt;         // ジャンプの押している長さのカウント
+    //private float jumpPower;       // ジャンプ力
 
     /**********************************
     * 
@@ -34,15 +36,16 @@ public class Player : MonoBehaviour
         isCeiling = false;
 
         //移動
-        //runSpeed = 0.02f;
-        runSpeed = 0.00f;
-        defaultRunSpeed = runSpeed;
+        defaultRunSpeed = 0.02f;
+        //defaultRunSpeed = 0.0f;
+        runSpeed = defaultRunSpeed;
+        
 
         //ジャンプ
         isJumpFlg = false;
         twoJumpFlg = false;
-        jumpPower = 150.0f;
         jumpCnt = 0.0f;
+        //jumpPower = 150.0f;
     }
 
     /**********************************
@@ -53,8 +56,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         //debug
-        Debug.Log("地面と接しているか" + isGround);
-        Debug.Log("天井と接しているか" + isCeiling);
+        //Debug.Log("地面と接しているか" + isGround);
+        //Debug.Log("天井と接しているか" + isCeiling);
         //Debug.Log("ジャンプカウント" + jumpCnt);
 
 
@@ -66,6 +69,10 @@ public class Player : MonoBehaviour
 
         //ジャンプ
         Jump();
+
+        //横滑り対処
+        GetComponent<Rigidbody2D>().velocity = 
+            new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
 
     }
 
@@ -119,22 +126,42 @@ public class Player : MonoBehaviour
     **********************************/
     void Jump()
     {
-        if (Input.GetKey(KeyCode.Space))
+        //ジャンプ
+        if (Input.GetKey(KeyCode.Space) && !twoJumpFlg)
         {
             isJumpFlg = true;
             jumpCnt += Time.deltaTime;
             Vector3 pos = transform.position;
 
-            if (jumpCnt < 0.4f && !isCeiling)
-                pos.y += 0.1f;// initVelocity * elapsedTime + gravity * Mathf.Pow(jumpCnt,2f)/ 2;
+            if (jumpCnt < 0.5f && !isCeiling )
+            {
+                pos.y += 0.1f;
+            }
 
             transform.position = pos;
         }
 
+        //二段ジャンプ
+        if(!isGround && !twoJumpFlg && Input.GetKeyUp(KeyCode.Space))
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                twoJumpFlg = true;
+            }
+        }
+
+        //接地
         if (isGround)
         {
             isJumpFlg = false;
             jumpCnt = 0f;
+            twoJumpFlg = false;
+        }
+
+        //接天
+        if (isCeiling)
+        {
+            jumpCnt = 0.5f;
         }
     }
 
