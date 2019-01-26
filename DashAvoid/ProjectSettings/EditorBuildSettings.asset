@@ -17,3 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/taki/scene/InGame.unity
     guid: 5ccb8acc4ee9ee445b5f9890adbde54c
+  - enabled: 1
+    path: Assets/Scenes/takeuchi/GameOver.unity
+    guid: fb49ab5a2d5ba3c43aa0230bf2f1603d
+  - enabled: 1
+    path: Assets/Scenes/takeuchi/GameClear.unity
+    guid: ae971ca535c7dab45b4d202bd660327a
