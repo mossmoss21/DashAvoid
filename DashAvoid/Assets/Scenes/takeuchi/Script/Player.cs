@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     //判定
     private bool isGround;         // 地面に接しているか
     private bool isCeiling;        // 天井に接している
+    private bool isTouchWallLeft;  // 右の壁に接しているか
+    private bool isTouchWallRight; // 左の壁に接しているか
+
 
     //移動
     private float runSpeed;        // プレイヤーの速度(増減)
@@ -34,12 +37,14 @@ public class Player : MonoBehaviour
         //判定
         isGround = false;
         isCeiling = false;
+        isTouchWallLeft = false;
+        isTouchWallRight = false;
 
         //移動
-        defaultRunSpeed = 0.02f;
-        //defaultRunSpeed = 0.0f;
+        //defaultRunSpeed = 0.02f;
+        defaultRunSpeed = 0.0f;
         runSpeed = defaultRunSpeed;
-        
+
 
         //ジャンプ
         isJumpFlg = false;
@@ -59,7 +64,8 @@ public class Player : MonoBehaviour
         //Debug.Log("地面と接しているか" + isGround);
         //Debug.Log("天井と接しているか" + isCeiling);
         //Debug.Log("ジャンプカウント" + jumpCnt);
-
+        Debug.Log("右壁" + isTouchWallRight);
+        Debug.Log("左壁" + isTouchWallLeft);
 
         //状態管理(判定)
         StateManagement();
@@ -69,10 +75,6 @@ public class Player : MonoBehaviour
 
         //ジャンプ
         Jump();
-
-        //横滑り対処
-        GetComponent<Rigidbody2D>().velocity = 
-            new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
 
     }
 
@@ -94,6 +96,18 @@ public class Player : MonoBehaviour
         isCeiling = Physics2D.Raycast(
             transform.position, Vector2.up,
             0.45f, 1 << LayerMask.NameToLayer("Block"));
+
+        //壁との当たり判定
+        //プレイヤーの右が layer="Block"
+        isTouchWallRight = Physics2D.Raycast(
+            transform.position, Vector2.right,
+            0.31f, 1 << LayerMask.NameToLayer("Block"));
+
+        //プレイヤーの右が layer="Block"
+        isTouchWallLeft = Physics2D.Raycast(
+            transform.position, Vector2.left,
+            0.31f, 1 << LayerMask.NameToLayer("Block"));
+
     }
 
     /**********************************
@@ -106,12 +120,14 @@ public class Player : MonoBehaviour
         runSpeed = defaultRunSpeed;
 
         //→ 加速
-        if (Input.GetKey(KeyCode.RightArrow)){
-            runSpeed = 0.03f;
+        if (Input.GetKey(KeyCode.RightArrow) && !isTouchWallRight)
+        {
+            runSpeed = 0.04f;
         }
         //← 減速
-        if (Input.GetKey(KeyCode.LeftArrow)){
-            runSpeed = -0.02f;
+        if (Input.GetKey(KeyCode.LeftArrow) && !isTouchWallLeft)
+        {
+            runSpeed = -0.04f;
         }
 
         //移動の計算
@@ -133,7 +149,7 @@ public class Player : MonoBehaviour
             jumpCnt += Time.deltaTime;
             Vector3 pos = transform.position;
 
-            if (jumpCnt < 0.5f && !isCeiling )
+            if (jumpCnt < 0.5f && !isCeiling)
             {
                 pos.y += 0.1f;
             }
@@ -142,7 +158,7 @@ public class Player : MonoBehaviour
         }
 
         //二段ジャンプ
-        if(!isGround && !twoJumpFlg && Input.GetKeyUp(KeyCode.Space))
+        if (!isGround && !twoJumpFlg && Input.GetKeyUp(KeyCode.Space))
         {
             if (Input.GetKey(KeyCode.Space))
             {
