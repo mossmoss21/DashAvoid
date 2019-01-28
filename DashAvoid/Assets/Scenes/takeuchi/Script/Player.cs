@@ -11,8 +11,7 @@ public class Player : MonoBehaviour
     private bool isCeiling;        // 天井に接している
     private bool isTouchWallLeft;  // 右の壁に接しているか
     private bool isTouchWallRight; // 左の壁に接しているか
-    public bool  isWait;           // 待機状態
-    public float move;             // 動いているかどうか
+
 
     //移動
     private float runSpeed;        // プレイヤーの速度(増減)
@@ -40,14 +39,12 @@ public class Player : MonoBehaviour
         isCeiling = false;
         isTouchWallLeft = false;
         isTouchWallRight = false;
-        isWait = true;
-        move = 0.0f;
-
 
         //移動
         //defaultRunSpeed = 0.02f;
         defaultRunSpeed = 0.0f;
         runSpeed = defaultRunSpeed;
+
 
         //ジャンプ
         isJumpFlg = false;
@@ -78,8 +75,6 @@ public class Player : MonoBehaviour
 
         //ジャンプ
         Jump();
-
-        GetComponent<Animator>().SetFloat("move", move);
 
     }
 
@@ -113,16 +108,6 @@ public class Player : MonoBehaviour
             transform.position, Vector2.left,
             0.31f, 1 << LayerMask.NameToLayer("Block"));
 
-        //プレイヤーが移動中
-        if(move == 0)
-        {
-            isWait = true;
-        }
-        else
-        {
-            isWait = false;
-        }
-
     }
 
     /**********************************
@@ -133,21 +118,16 @@ public class Player : MonoBehaviour
     void Move()
     {
         runSpeed = defaultRunSpeed;
-        move = 0;
 
         //→ 加速
         if (Input.GetKey(KeyCode.RightArrow) && !isTouchWallRight)
         {
             runSpeed = 0.04f;
-            GetComponent<SpriteRenderer>().flipX = false;
-            move = 1f;
         }
         //← 減速
         if (Input.GetKey(KeyCode.LeftArrow) && !isTouchWallLeft)
         {
             runSpeed = -0.04f;
-            GetComponent<SpriteRenderer>().flipX = false;
-            move = -1f;
         }
 
         //移動の計算
