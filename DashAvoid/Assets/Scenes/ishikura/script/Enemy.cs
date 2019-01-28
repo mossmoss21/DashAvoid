@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
 
@@ -8,33 +9,26 @@ public class Enemy : MonoBehaviour {
     public float speed = 5;
 
     // PlayerBulletプレハブ
-    public GameObject bullet;
+    public GameObject Bullet;
+    public Transform target;    // 追いかける対象
 
     // Startメソッドをコルーチンとして呼び出す
-    IEnumerator Start(){
+    IEnumerator Start()
+    {
 
         while (true)
         {
             // 弾をエネミーと同じ位置 /角度で作成
-            Instantiate(bullet, transform.position, transform.rotation);
+            Instantiate(Bullet, transform.position, transform.rotation);
             // 0.05秒待つ
             yield return new WaitForSeconds(1f);
         }
     }
 
     // Update is called once per frame
-    void Update () {
-        /*
-            Vector2 Aim(GameObject Enemy, GameObject Player, float angleOffset)
-            {
-                Vector3 posDif = Player.transform.position - Enemy.transform.position;
-                float angle = Mathf.Atan2(posDif.y, posDif.x) * Mathf.Rad2Deg;
-                Vector3 euler = new Vector3(0, 0, angle + angleOffset);
-
-                Enemy.transform.rotation = Quaternion.Euler(euler);
-
-                return posDif.normalized;
-            }
-        */
+    void Update()
+    {
+        // 対象に少しずつ向く
+        transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(target.position - transform.position), 0.009f);
     }
 }
