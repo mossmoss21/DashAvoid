@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4098910085976170}
   - component: {fileID: 212623206521546004}
   - component: {fileID: 61821834788398656}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: angura33-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
