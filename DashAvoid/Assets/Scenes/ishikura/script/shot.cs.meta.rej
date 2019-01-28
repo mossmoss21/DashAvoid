@@ -1,0 +1,13 @@
+diff a/DashAvoid/Assets/Scenes/ishikura/script/shot.cs.meta b/DashAvoid/Assets/Scenes/ishikura/script/shot.cs.meta	(rejected hunks)
+@@ -0,0 +1,11 @@
++fileFormatVersion: 2
++guid: 6bfaf6d700f26f0459342cc38be56e7c
++MonoImporter:
++  externalObjects: {}
++  serializedVersion: 2
++  defaultReferences: []
++  executionOrder: 0
++  icon: {instanceID: 0}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 
