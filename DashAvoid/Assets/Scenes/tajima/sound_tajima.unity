@@ -266,6 +266,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cdd8b9b155590e642b5d92c3a046a2be, type: 3}
   SEList:
   - {fileID: 8300000, guid: fcd51e4cc7cd97f4e944a34a9e47718d, type: 3}
+  - {fileID: 8300000, guid: 993bed44384e0994a8c44c26bf275814, type: 3}
+  - {fileID: 8300000, guid: 71d7906118df65a4686c8135e78e70f6, type: 3}
+  - {fileID: 8300000, guid: 2c37fbdc5e9768141a81b7e514cfc72f, type: 3}
   MaxSE: 10
 --- !u!4 &1083581164
 Transform:

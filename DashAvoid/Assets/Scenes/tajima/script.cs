@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class script : MonoBehaviour
+public class Script : MonoBehaviour
 {
 
     void OnGUI()
@@ -21,19 +21,23 @@ public class script : MonoBehaviour
         {
             AudioManager.Instance.StopBGM();
         }
-        if (GUI.Button(new Rect(10, 200, 100, 50), "SE1"))
+        if (GUI.Button(new Rect(10, 200, 100, 50), "ClearJingle"))
         {
-            AudioManager.Instance.PlaySE("SE1");
+            AudioManager.Instance.PlaySE("ClearJingle");
         }
-        /*if (GUI.Button(new Rect(110, 200, 100, 50), "SE2"))
+        if (GUI.Button(new Rect(110, 200, 100, 50), "Jump"))
         {
-            AudioManager.Instance.PlaySE("se2");
+            AudioManager.Instance.PlaySE("Jump");
         }
-        if (GUI.Button(new Rect(210, 200, 100, 50), "SE3"))
+        if (GUI.Button(new Rect(210, 200, 100, 50), "Coin"))
         {
-            AudioManager.Instance.PlaySE("se3");
-        }*/
-        if (GUI.Button(new Rect(310, 200, 100, 50), "SESTOP"))
+            AudioManager.Instance.PlaySE("Coin");
+        }
+        if (GUI.Button(new Rect(310, 200, 100, 50), "Select"))
+        {
+            AudioManager.Instance.PlaySE("Select");
+        }
+        if (GUI.Button(new Rect(410, 200, 100, 50), "SESTOP"))
         {
             AudioManager.Instance.StopSE();
         }
