@@ -24,9 +24,9 @@ public class Bullet_S : MonoBehaviour {
         float step = Time.deltaTime * speed;
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
     }
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(this.gameObject);
-        Debug.Log("破壊されているはず");
+        Destroy(this.gameObject);   //自分を消去する
     }
+
 }
