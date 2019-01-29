@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bullet_N : MonoBehaviour {
 
@@ -38,6 +39,8 @@ public class Bullet_N : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         Destroy(this.gameObject);
-        Debug.Log("破壊されているはず");
+        SceneManager.LoadScene("GameOver");
+
+        //Debug.Log("破壊されているはず");
     }
 }
