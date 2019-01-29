@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.AI;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
 
     // 移動スピード
-    public float speed = 5;
+   // public float speed = 5;
 
     // PlayerBulletプレハブ
     public GameObject Bullet;
     public Transform target;    // 追いかける対象
+
+    //private int count = 0;      // 弾のカウント
 
     // Startメソッドをコルーチンとして呼び出す
     IEnumerator Start()
@@ -30,5 +32,14 @@ public class Enemy : MonoBehaviour {
     {
         // 対象に少しずつ向く
         transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(target.position - transform.position), 0.009f);
+        /*
+        count += 1;
+
+        // １００フレームごとにEnemyShot()メソッドを実行する。
+        if (count % 100 == 0)
+        {
+            Bullet();
+        }
+        */
     }
 }
