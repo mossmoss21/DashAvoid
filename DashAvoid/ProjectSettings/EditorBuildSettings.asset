@@ -5,21 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/taki/scene/red.unity
     guid: f953689fc94d2cf4f87b52ec4d9f63aa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/taki/scene/blue.unity
     guid: a1ae82841f89e5943a3737eac5ff6fbd
   - enabled: 1
-    path: Assets/Scenes/taki/scene/title.unity
+    path: Assets/Scenes/Scene/title.unity
     guid: 38b45c694ea50864ca6e272301dc8eb2
   - enabled: 1
-    path: Assets/Scenes/taki/scene/InGame.unity
+    path: Assets/Scenes/InGame.unity
     guid: 5ccb8acc4ee9ee445b5f9890adbde54c
   - enabled: 1
-    path: Assets/Scenes/takeuchi/GameOver.unity
+    path: Assets/Scenes/Scene/GameOver.unity
     guid: fb49ab5a2d5ba3c43aa0230bf2f1603d
   - enabled: 1
-    path: Assets/Scenes/takeuchi/GameClear.unity
+    path: Assets/Scenes/Scene/GameClear.unity
     guid: ae971ca535c7dab45b4d202bd660327a

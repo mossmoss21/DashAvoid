@@ -108,6 +108,11 @@ public class Player : MonoBehaviour
             transform.position, Vector2.left,
             0.31f, 1 << LayerMask.NameToLayer("Block"));
 
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    AudioManager.Instance.PlaySE("Jump");
+        //}
+
     }
 
     /**********************************
@@ -145,9 +150,11 @@ public class Player : MonoBehaviour
         //ジャンプ
         if (Input.GetKey(KeyCode.Space) && !twoJumpFlg)
         {
+
             isJumpFlg = true;
             jumpCnt += Time.deltaTime;
             Vector3 pos = transform.position;
+            
 
             if (jumpCnt < 0.5f && !isCeiling)
             {
