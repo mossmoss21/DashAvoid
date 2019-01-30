@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour {
             // 弾をエネミーと同じ位置 /角度で作成
             Instantiate(Bullet, transform.position, transform.rotation);
             // 0.05秒待つ
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
         }
     }
 

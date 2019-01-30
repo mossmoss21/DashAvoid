@@ -33,7 +33,7 @@ public class Bullet_T : MonoBehaviour {
         count += 1;
 
         // １００フレームごとにEnemyShot()メソッドを実行する。
-        if (count % 800 == 0)
+        if (count % 400 == 0)
         {
             Destroy(this.gameObject);
         }
