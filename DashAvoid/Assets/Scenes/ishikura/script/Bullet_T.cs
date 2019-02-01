@@ -21,7 +21,7 @@ public class Bullet_T : MonoBehaviour {
         GameObject player = GameObject.Find("Player");
         float speed = 3.0f;
         float step = Time.deltaTime * speed;
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(Player.x, Player.y), step);
+        //transform.position = Vector2.MoveTowards(transform.position, new Vector2(Player.x, Player.y), step);
 
         count += 1;
 
