@@ -8,20 +8,25 @@ public class Bullet_T : MonoBehaviour {
     private int count = 0;      // 弾のカウント
     //private float speed = 3.0f;
     // Use this for initialization
+    public GameObject Player;
+    Vector2 vect;
+
     void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1.0f);
-        Vector2 Player;
+        //   GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1.0f);
+        vect = Player.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         //追尾
-        GameObject player = GameObject.Find("Player");
+        //GameObject player = GameObject.Find("Player");
         float speed = 3.0f;
         float step = Time.deltaTime * speed;
-        //transform.position = Vector2.MoveTowards(transform.position, new Vector2(Player.x, Player.y), step);
+        //transform.position = Vector2.MoveTowards(transform.position, new Vector2(Player.transform.position.x, Player.transform.position.y), step);
+        transform.position = Vector2.MoveTowards(transform.position, vect, step);
+        //transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 10), step);
 
         count += 1;
 
