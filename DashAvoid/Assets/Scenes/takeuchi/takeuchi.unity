@@ -4310,6 +4310,7 @@ GameObject:
   - component: {fileID: 321244558}
   - component: {fileID: 321244557}
   - component: {fileID: 321244556}
+  - component: {fileID: 321244561}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4363,7 +4364,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 1.39735, y: 0.49598897}
     oldSize: {x: 0.45833334, y: 0.9583333}
     newSize: {x: 0.45833334, y: 0.9583333}
     adaptiveTilingThreshold: 0.5
@@ -4430,6 +4431,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &321244561
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 321244555}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 178527c64c5b6e34fafb65cae938a8d1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &324422825 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4098910085976170, guid: 013c3ffca99c4fd42b18d2522675bd4f,
