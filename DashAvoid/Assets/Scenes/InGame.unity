@@ -3558,6 +3558,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -7971,6 +7972,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 013c3ffca99c4fd42b18d2522675bd4f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &654478616 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1344831808642508, guid: 16b3bf979bfb70b41b3550558fa179a4,
+    type: 2}
+  m_PrefabInternal: {fileID: 2006979942}
+--- !u!114 &654478617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 654478616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46a623213ed69e4f9a27494a213c73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &656286710
 Prefab:
   m_ObjectHideFlags: 0
@@ -24889,7 +24906,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114164414181452278, guid: 16b3bf979bfb70b41b3550558fa179a4, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 16b3bf979bfb70b41b3550558fa179a4, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2007312133 stripped
