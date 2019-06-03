@@ -23,3 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene/GameClear.unity
     guid: ae971ca535c7dab45b4d202bd660327a
+  - enabled: 1
+    path: Assets/Scenes/Takai/Map01.unity
+    guid: 9a04b669edcc2fe48a109e0f25044249
+  - enabled: 1
+    path: Assets/Scenes/Takai/Stage Select.unity
+    guid: 7e254757bcfa57f4a81f85066d682be4
