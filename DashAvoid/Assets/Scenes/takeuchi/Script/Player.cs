@@ -61,9 +61,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         //debug
-        //Debug.Log("地面と接しているか" + isGround);
-        //Debug.Log("天井と接しているか" + isCeiling);
-        //Debug.Log("ジャンプカウント" + jumpCnt);
+        Debug.Log("地面と接しているか" + isGround);
+        Debug.Log("天井と接しているか" + isCeiling);
+        Debug.Log("ジャンプカウント" + jumpCnt);
         Debug.Log("右壁" + isTouchWallRight);
         Debug.Log("左壁" + isTouchWallLeft);
 

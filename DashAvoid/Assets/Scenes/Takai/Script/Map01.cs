@@ -18,9 +18,9 @@ public class Map01 : MonoBehaviour {
 "noooooooooooooooooooooooooooooooobooooocoboooooooooooooooooooooooooooooooooooooooooocooboooooooooooboooooooooooobbbbb",// 3
 "nooooooooooooooooocoooooooooooooobooooooobooooooooooooooooooooooooooooooooooooooooooooobooooooooooobooooooooooooobbbb",// 4
 "nooooooooooooooooooooooooooooooooboooobbbbooooooooooooooooooooooooooooooooooooooooooooooooooooooooobooooooooooooobbbb",// 5
-"nooooooooooooooooooobbbbbbbbooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooobooocooooooooooooo",// 6
-"nooooooooooooooooooooooooooooooooooooooooooooooooooobbbbbbboooooooobbbbbbbbbbbbbbbboooooooooooooooobooooooooooooooooo",// 7
-"nooooooooooooooooooooooooooocoooobbooooooooooooooooooooooobbooooocooooooooooooooooooooooooooooooooobooooooooooooooooo",// 8
+"nooooooooooooooooooobbbbbbbbooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooobooocoooooooooooog",// 6
+"nooooooooooooooooooooooooooooooooooooooooooooooooooobbbbbbboooooooobbbbbbbbbbbbbbbbooooooooooooooooboooooooooooooooog",// 7
+"nooooooooooooooooooooooooooocoooobbooooooooooooooooooooooobbooooocoooooooooooooooooooooooooooooooooboooooooooooooooog",// 8
 "nooooooooooooooobooooooooooooooooboooooooooooooooooooooooobbbooooooooooooooooooooooooooooooooooooooooooooooooooooooob",// 9
 "noooooobbbbboooobboooooobbbbbbbooboooooooooooooobbbbbooooobbbboooooooooooooooooooooooobbbbbbbbbbooooooobbbbbooooobbbb",// 10
 "nooooooooooooooobbbooooooooooooooboooooooooooooobbbbbooooobbbbboooooooooooooooooooooobbbbbboooooooooooobbbbboooobbbbb",// 11
@@ -35,11 +35,16 @@ public class Map01 : MonoBehaviour {
         GameObject Block = (GameObject)Resources.Load("Prefabs/pBlock");
         GameObject Needle = (GameObject)Resources.Load("Prefabs/pNeedle");
         GameObject Coin = (GameObject)Resources.Load("Prefabs/pCoin");
+        GameObject Goal = (GameObject)Resources.Load("Prefabs/pGoal");
 
         for (int i = 0; i < stage.GetLength(0); i++)
         {
             for (int j = 0; j < stage[i].Length; j++)
             {
+                if (stage[i].Substring(j, 1) == "g")
+                {
+                    Instantiate(Goal, new Vector3(startX + j * massWidth, startY - i * massHeighth, 0.0f), Quaternion.identity);
+                }
                 if (stage[i].Substring(j, 1) == "b")
                 {
                     Instantiate(Block, new Vector3(startX + j * massWidth, startY - i * massHeighth, 0.0f), Quaternion.identity);
