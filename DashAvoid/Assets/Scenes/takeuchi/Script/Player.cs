@@ -25,6 +25,11 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D _rigidbody2D;
 
+    //スキル
+    private float defaultSkillCT;   // スキルのクールタイム初期化用
+    private float skillCT;          // スキルのクールタイムカウント用
+    private float skillMoveRange;   // スキルの移動距離
+
     /**********************************
     * 
     * 初期化
@@ -50,9 +55,14 @@ public class Player : MonoBehaviour
         
         jumpMaxCnt = 0.0f;
         jumpMaxTime = 2.0f;
-        gravity = 1.8f;
+        gravity = 2.5f;
 
         _rigidbody2D = GetComponent<Rigidbody2D>();
+
+        // スキル
+        defaultSkillCT = 10.0f;
+        skillCT = defaultSkillCT;
+        skillMoveRange = 2.0f;
 
     }
 
@@ -86,7 +96,6 @@ public class Player : MonoBehaviour
         else if (isJumpFlg == true && Input.GetKey(KeyCode.Space))
         {
             Jump();
-            Debug.Log("スペース押されている");
         }
         else
         {
@@ -94,6 +103,17 @@ public class Player : MonoBehaviour
             isJumpFlg = false;
             jumpMaxCnt = 0.0f;
             isCeiling = false;
+        }
+
+        // スキル
+        if (skillCT <= 0)
+        {
+            Skill();
+            Debug.Log("CT終了");
+        }
+        else if(skillCT > 0)
+        {
+            skillCT -= Time.deltaTime * 5;
         }
 
     }
@@ -171,5 +191,39 @@ public class Player : MonoBehaviour
             isJumpFlg = false;
         }
     }
-
+    /**********************************
+    * 
+    * スキル
+    * 
+    **********************************/
+    void Skill()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (Input.GetKey(KeyCode.RightArrow) && isTouchWallRight == false)
+            {
+                transform.position += new Vector3(skillMoveRange, 0, 0);
+                skillCT = defaultSkillCT;
+                //Debug.Log("スキル発動");
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow) && isTouchWallLeft == false)
+            {
+                transform.position += new Vector3(-skillMoveRange, 0, 0);
+                skillCT = defaultSkillCT;
+                //Debug.Log("スキル発動");
+            }
+            else if (Input.GetKey(KeyCode.UpArrow) && isCeiling == false)
+            {
+                transform.position += new Vector3(0, skillMoveRange, 0);
+                skillCT = defaultSkillCT;
+                //Debug.Log("スキル発動");
+            }
+            else if (Input.GetKey(KeyCode.DownArrow) && isGround == false)
+            {
+                transform.position += new Vector3(0, -skillMoveRange, 0);
+                skillCT = defaultSkillCT;
+                //Debug.Log("スキル発動");
+            }
+        }
+    }
 }
