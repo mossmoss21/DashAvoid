@@ -20,8 +20,10 @@ public class MoveWall : MonoBehaviour {
 
     //当たったらシーンをGAMEOVERへ
     private void OnTriggerEnter2D(Collider2D collision)
+    //function OnTriggerEnter2D(col:Collider2D)
     {
         SceneManager.LoadScene("GameOver");
+        Debug.Log("Player Deth");
     }
 
 }

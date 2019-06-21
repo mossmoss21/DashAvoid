@@ -35,3 +35,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 DashAvoid/Assets/Scenes/ishikura/script/shot.cs.meta
+Unity.exe - ショートカット.lnk
+DashAvoid/Assets/NewBehaviourScript.cs.meta
+DashAvoid/Assets/tmp.cs
+DashAvoid/Assets/tmp.cs.meta
