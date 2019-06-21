@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
     private float defaultSkillCT;   // スキルのクールタイム初期化用
     private float skillCT;          // スキルのクールタイムカウント用
     private float skillMoveRange;   // スキルの移動距離
+    Vector2 force;                  // AddForceで使用
+
+    private Collider2D _collider;
 
     /**********************************
     * 
@@ -62,8 +65,11 @@ public class Player : MonoBehaviour
         // スキル
         defaultSkillCT = 10.0f;
         skillCT = defaultSkillCT;
-        skillMoveRange = 2.0f;
+        skillMoveRange = 10.0f;
 
+        force = new Vector2(0.0f, 0.0f);
+
+        _collider = GetComponent<Collider2D>();
     }
 
     /**********************************
@@ -113,9 +119,11 @@ public class Player : MonoBehaviour
         }
         else if(skillCT > 0)
         {
+            _collider.isTrigger = false;
+            force = new Vector2(0.0f, 0.0f);
             skillCT -= Time.deltaTime * 5;
         }
-
+        Debug.Log(_collider.isTrigger);
     }
 
     /**********************************
@@ -202,28 +210,34 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.RightArrow) && isTouchWallRight == false)
             {
-                transform.position += new Vector3(skillMoveRange, 0, 0);
+                //_collider.isTrigger = true;
+                force = new Vector2(skillMoveRange, 0);
                 skillCT = defaultSkillCT;
-                //Debug.Log("スキル発動");
             }
             else if (Input.GetKey(KeyCode.LeftArrow) && isTouchWallLeft == false)
             {
-                transform.position += new Vector3(-skillMoveRange, 0, 0);
+                //_collider.isTrigger = true;
+                force = new Vector2(-skillMoveRange, 0);
                 skillCT = defaultSkillCT;
-                //Debug.Log("スキル発動");
             }
             else if (Input.GetKey(KeyCode.UpArrow) && isCeiling == false)
             {
-                transform.position += new Vector3(0, skillMoveRange, 0);
+                //_collider.isTrigger = true;
+                force = new Vector2(0,skillMoveRange);
                 skillCT = defaultSkillCT;
-                //Debug.Log("スキル発動");
             }
             else if (Input.GetKey(KeyCode.DownArrow) && isGround == false)
             {
-                transform.position += new Vector3(0, -skillMoveRange, 0);
+                //_collider.isTrigger = true;
+                force = new Vector2(0,-skillMoveRange);
                 skillCT = defaultSkillCT;
-                //Debug.Log("スキル発動");
             }
         }
+        _rigidbody2D.AddForce(force,ForceMode2D.Impulse);
     }
 }
+
+//当たり判定無くなってるの一瞬では(?)
+
+//yield return new WaitForSeconds(1.0f);
+//_collider.isTrigger = false;
