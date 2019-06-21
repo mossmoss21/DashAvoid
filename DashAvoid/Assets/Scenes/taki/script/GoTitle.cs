@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class botton : MonoBehaviour {
+public class Gotitle : MonoBehaviour {
+
+    
+
+
 
 
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("InGame");
+        SceneManager.LoadScene("title");
     }
 }
